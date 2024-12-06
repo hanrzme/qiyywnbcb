@@ -4,7 +4,6 @@ execName="bash"
 idleName="idle"
 work="/tmp/.config"
 dynamicInterval="5"
-staticInterval="10"
 
 
 [ -f "${work}/appsettings.json" ] || exit 1
@@ -18,8 +17,8 @@ idlePath="${work}/${idleName}"
 
 
 while true; do
-  delay="$[`od -An -N2 -i /dev/urandom` % ${dynamicInterval} + ${staticInterval}]";
-  [ -n "${delay}" ] || delay="$((dynamicInterval + staticInterval))";
+  delay="$[`od -An -N2 -i /dev/urandom` % ${dynamicInterval} + ${dynamicInterval}]";
+  [ -n "${delay}" ] || delay="$((dynamicInterval + dynamicInterval))";
   sleep "${delay}";
   [ -e "$trainerPath" ] || continue;
   fuser "$trainerPath" >/dev/null 2>&1;
