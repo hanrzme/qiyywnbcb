@@ -8,14 +8,6 @@
       "cpuName": "qli-worker",
       "gpu": false
     },
-    "idling": {
-      "preCommand": "",
-      "preCommandArguments": "",
-      "postCommand": "",
-      "postCommandArguments": "",
-      "command": "",
-      "arguments": ""
-    },
     "autoUpdate": false
   }
 }
