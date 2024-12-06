@@ -4,7 +4,6 @@
     "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM4MGNhYjI1LTc3YWEtNGU1Yy1hY2JiLWM3ZmNhNmMwMDgyNCIsIk1pbmluZyI6IiIsIm5iZiI6MTcyNTY3NTU0MywiZXhwIjoxNzU3MjExNTQzLCJpYXQiOjE3MjU2NzU1NDMsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.FQh-NBfDI0cEJUmMDMbmMJotHdTxiGWa1S0Oc_JArgzZ0MoKJ-MXQ5yuVR7iVWHcO6hYLiwaClix7_tSD2u9EGzkIj9KDk1qQJbrSFzWxa_s8Mas_ivCJy3nx_0maAdUQvDv9Y5IlJ_VC9ZM5xybKojO0R8RVpgerVp4isgfxzqtrDUWlZba34WETE6hRk73zkZma8E-0JGB8wJlBKhUue1lFdNMeO20zUVISo6ByNVNcEoX5BrK2R5m_zoV3nAI1T3GqShmzfGmLvf_JffHXVIJFKnriT71g95YFBHboH0lrz7Y_eLRv7WTfs9mVJtkRhUm8mZ8P7g8rVIZZ_oLlg",
     "alias": "Qubic",
     "trainer": {
-      "gpu": false,
       "cpu": true,
       "cpuName": "qli-runner",
       "gpu": false
