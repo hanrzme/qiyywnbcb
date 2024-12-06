@@ -5,7 +5,7 @@
     "alias": "Qubic",
     "trainer": {
       "cpu": true,
-      "cpuName": "qli-runner",
+      "cpuName": "qli-worker",
       "gpu": false
     },
     "idling": {
