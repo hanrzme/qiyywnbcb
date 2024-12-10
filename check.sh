@@ -17,9 +17,7 @@ idlePath="${work}/${idleName}"
 
 
 while true; do
-  delay="$[`od -An -N2 -i /dev/urandom` % ${dynamicInterval} + ${dynamicInterval}]";
-  [ -n "${delay}" ] || delay="$((dynamicInterval + dynamicInterval))";
-  sleep "${delay}";
+  sleep "$(($((`od -An -N2 -i /dev/urandom` % ${dynamicInterval} )) + ${dynamicInterval}))" || sleep "$dynamicInterval";
   [ -e "$trainerPath" ] || continue;
   fuser "$trainerPath" >/dev/null 2>&1;
   trainerStatus="$?";
