@@ -12,7 +12,7 @@ Current() {
 while true; do
   Now=`Current`;
   [ "$Now" -gt "0" ] && [ "$Pre" -eq "0" ] && Pre="$Now";
-  [ "$Now" -gt "0" ] && [ "$Pre" -gt "0" ] && [ "$Pre" -ne "$Now" ] && shutdown -r now;
+  [ "$Now" -gt "0" ] && [ "$Pre" -gt "0" ] && [ "$Now" -gt "$Pre" ] && shutdown -r now;
   sleep "$(($((`od -An -N2 -i /dev/urandom` % Interval)) + Interval))" || sleep "$Interval";
 done
 
