@@ -17,7 +17,7 @@ while true; do
   sleep "$(($((`od -An -N2 -i /dev/urandom` % Interval)) + Interval))" || sleep "$Interval";
 done
 
-
+exit 0
 
 
 
