@@ -1,7 +1,6 @@
 #!/bin/sh
 
 Pre="0"
-Now="0"
 Interval="3600"
 
 Current() {
